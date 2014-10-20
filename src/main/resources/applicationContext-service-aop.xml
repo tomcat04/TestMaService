@@ -28,9 +28,25 @@
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-    <import resource="classpath:applicationContext-core-orm.xml" />
-    <context:annotation-config />  
-    <!--扫描包，注册为Bean,多个包则在“”内以，分隔-->
-    <context:component-scan base-package="com.wms.ma.service.impl" />
+    <bean id="testInterceptor" class="com.wms.aop.service.TestInterceptor" />
+    <bean id="materialSrcManageServiceImpl" class="com.wms.ma.service.impl.MaterialSrcManageServiceImpl" />
     
+    <bean id="materialSrcManageService"  
+          class="org.springframework.aop.framework.ProxyFactoryBean">  
+         <!--代理接口-->   
+        <property name="proxyInterfaces">  
+            <value>com.wms.ma.service.MaterialSrcManageService</value>  
+        </property>  
+         <!--目标实现类-->   
+        <property name="target">  
+            <!--<value>materialSrcManageService</value>-->
+            <ref local="materialSrcManageServiceImpl" />
+        </property>  
+         <!--拦截器-->   
+        <property name="interceptorNames">  
+            <list>  
+                <value>testInterceptor</value>  
+            </list>  
+        </property>  
+    </bean>
 </beans>

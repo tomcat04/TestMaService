@@ -7,18 +7,32 @@
 package com.wms.ma.service.impl;
 
 import com.wms.ma.bean.MaterialSrcBean;
+import com.wms.ma.service.MaterialSrcManageService;
+import com.wms.util.test.WmsSpringJUnit4ClassRunner;
+import javax.annotation.Resource;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.springframework.stereotype.Service;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 
 /**
  *
  * @author cgx1844568
  */
+@RunWith(WmsSpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:applicationContext-service.xml"})
+//@ContextConfiguration(locations={"file:src/main/java/applicationContext-core.xml"})
+@TransactionConfiguration(defaultRollback = false)
 public class MaterialSrcManageServiceImplTest {
+    
+    @Resource
+    private MaterialSrcManageService materialSrcManageService;
     
     public MaterialSrcManageServiceImplTest() {
     }
@@ -42,16 +56,12 @@ public class MaterialSrcManageServiceImplTest {
     /**
      * Test of querySingleMaterial method, of class MaterialSrcManageServiceImpl.
      */
-    @org.junit.Test
+    @Test
     public void testQuerySingleMaterial() {
         System.out.println("querySingleMaterial");
-        String materialCode = "";
-        MaterialSrcManageServiceImpl instance = new MaterialSrcManageServiceImpl();
-        MaterialSrcBean expResult = null;
-        MaterialSrcBean result = instance.querySingleMaterial(materialCode);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        MaterialSrcBean result = materialSrcManageService.querySingleMaterial("");
+//        fail("The test case is a prototype.");
+        System.out.println(" test over ");
     }
     
 }
