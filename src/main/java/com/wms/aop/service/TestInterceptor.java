@@ -9,6 +9,7 @@ package com.wms.aop.service;
 import java.lang.reflect.Method;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.apache.commons.lang.time.StopWatch;
 
 /**
  *
@@ -25,9 +26,13 @@ public class TestInterceptor implements MethodInterceptor{
         Object[] args = mi.getArguments();
         Method method = mi.getMethod();
         Object target = mi.getThis();
+        
+        StopWatch sw = new StopWatch();
+        sw.start();
         Object returnValue = mi.proceed();//执行被切入点的方法
+        sw.stop();
         System.out.println("exit around advice method...");
-        System.out.println("输出:" + args[0] + ";" + method + ";" + target + ";" + returnValue + "\n");
+        System.out.println("输出:[" + sw.getTime() + "ms]" + args[0] + ";" + method + ";" + target + ";" + returnValue + "\n");
         return returnValue;
     }
 

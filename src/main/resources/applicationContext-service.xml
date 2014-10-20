@@ -33,4 +33,5 @@
     <!--扫描包，注册为Bean,多个包则在“”内以，分隔-->
     <context:component-scan base-package="com.wms.ma.service.impl" />
     
+    <import resource="classpath:applicationContext-service-aop.xml" />
 </beans>
