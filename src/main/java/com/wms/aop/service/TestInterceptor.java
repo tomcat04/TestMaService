@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang.time.StopWatch;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -20,8 +21,19 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class TestInterceptor implements MethodInterceptor{
 
+    private static final Logger logger = Logger.getLogger(TestInterceptor.class);
+    
+    private static final Logger traceLogger = Logger.getLogger("traceLogger");
+    
     @Override
     public Object invoke(MethodInvocation mi) throws Throwable {
+        traceLogger.info("traceLogger日志记录");
+        logger.debug("logger debug");
+        logger.error("logger error");
+        logger.fatal("logger fatal");
+        logger.info("logger info");
+        logger.trace("logger trace");
+        logger.warn("logger warn");
         System.out.println("enter around advice method...");
         Object[] args = mi.getArguments();
         Method method = mi.getMethod();
