@@ -4,13 +4,14 @@
  * and open the template in the editor.
  */
 
-package com.wms.aop.service;
+package com.wms.aop.advice;
 
 import java.lang.reflect.Method;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 /**
  *
@@ -18,7 +19,9 @@ import org.apache.log4j.Logger;
  * @date 2014-10-20
  * @time 9:17:34
  * 环绕通知(around advice)：包围切入点，调用方法前后完成自定义行为。
+ * 基本的aop配置,配合applicationContext-service-aop使用
  */
+@Component
 public class TestInterceptor implements MethodInterceptor{
 
     private static final Logger logger = Logger.getLogger(TestInterceptor.class);

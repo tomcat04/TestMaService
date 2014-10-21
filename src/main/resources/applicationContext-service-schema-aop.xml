@@ -28,26 +28,24 @@
      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-    <bean id="testInterceptor" class="com.wms.aop.advice.TestInterceptor" />
-    <bean id="materialSrcManageServiceImpl" class="com.wms.ma.service.impl.MaterialSrcManageServiceImpl" />
+    <!--通知类-->
+    <bean id="aspectSchemaAdvice" class="com.wms.aop.advice.AspectSchemaAdvice" />
+    <!--业务类-->
+<!--    <bean id="materialSrcManageServiceImpl" class="com.wms.ma.service.impl.MaterialSrcManageServiceImpl" />-->
     
-    <bean id="materialSrcManageService"  
-          class="org.springframework.aop.framework.ProxyFactoryBean">  
-         <!--代理接口-->   
-        <property name="proxyInterfaces">  
-            <value>com.wms.ma.service.MaterialSrcManageService</value>  
-        </property>  
-         <!--目标实现类-->   
-        <property name="target">  
-            <!--<value>materialSrcManageService</value>-->
-            <ref local="materialSrcManageServiceImpl" />
-        </property>  
-         <!--拦截器-->   
-        <property name="interceptorNames">  
-            <list>  
-                <!--可配置多个拦截器-->
-                <value>testInterceptor</value>  
-            </list>  
-        </property>  
-    </bean>
+    <aop:config>
+        <aop:aspect id="testinterceptor" ref="aspectSchemaAdvice">
+            <aop:pointcut id="point_cut" expression="execution(* com.wms.ma.service.*.*(..))"/>
+            <!--仅配置某一方法-->
+            <!--<aop:pointcut id="" expression="execution(* com.wms.ma.service.*.method(..))">-->
+            
+            <!--前置通知-->
+            <aop:before method="doBefore" pointcut-ref="point_cut"/>
+            <!--后置通知-->
+            <!--<aop:after method="" pointcut-ref="">-->
+            <aop:after-returning method="doAfter" pointcut-ref="point_cut" returning="bean"/>
+            <!--<aop:around method="" pointcut-ref=""/>-->
+            <!--<aop:after-throwing method="" pointcut-ref="" throwing=""/>-->
+        </aop:aspect>
+    </aop:config>
 </beans>

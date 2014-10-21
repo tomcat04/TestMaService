@@ -31,7 +31,11 @@
     <import resource="classpath:applicationContext-core-orm.xml" />
     <context:annotation-config />  
     <!--扫描包，注册为Bean,多个包则在“”内以，分隔-->
-    <context:component-scan base-package="com.wms.ma.service.impl" />
+    <context:component-scan base-package="com.wms.ma.service.impl,com.wms.aop.advice" />
     
-    <import resource="classpath:applicationContext-service-aop.xml" />
+    <!--<import resource="classpath:applicationContext-service-aop.xml" />-->
+    <!--<import resource="classpath:applicationContext-service-schema-aop.xml" />-->
+    
+    <!-- 打开aop 注解 -->
+    <aop:aspectj-autoproxy />
 </beans>
