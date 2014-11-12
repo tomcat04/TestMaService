@@ -10,9 +10,14 @@ import com.wms.core.mapper.MaterialMapper;
 import com.wms.ma.bean.MaterialSrcBean;
 import com.wms.ma.service.MaterialSrcManageService;
 import java.util.List;
+import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 
 /**
  *
@@ -26,6 +31,9 @@ public class MaterialSrcManageServiceImpl implements MaterialSrcManageService{
 
     @Autowired
     private MaterialMapper materialMapper;
+    
+    @Resource 
+    PlatformTransactionManager platformTransactionManager;
     
     @Override
     public MaterialSrcBean querySingleMaterial(String materialCode) {
@@ -41,8 +49,32 @@ public class MaterialSrcManageServiceImpl implements MaterialSrcManageService{
     @Transactional
     @Override
     public void addMaterial(List<MaterialSrcBean> list) {
+//        this.addMaterialList(list);
         for(MaterialSrcBean msb:list){
             materialMapper.insetOne(msb);
         }
+    }
+
+    @Override
+    public void addMaterialList(List<MaterialSrcBean> list) {
+        DefaultTransactionDefinition def = new DefaultTransactionDefinition();
+        def.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRED);
+
+        TransactionStatus status = platformTransactionManager.getTransaction(def);
+        /**
+         * 编程式事务嵌套声明式事务时,事务不会提交
+         * 声明式事务嵌套编程式事务时,事务也不会提交
+         */
+//        this.addMaterial(list);
+        for(MaterialSrcBean msb:list){
+            materialMapper.insetOne(msb);
+        }
+        
+        platformTransactionManager.rollback(status);
+    }
+
+    @Override
+    public MaterialSrcBean getMaterial(String materialCode) {
+        return materialMapper.selectOne(materialCode);
     }
 }

@@ -69,13 +69,31 @@ public class MaterialSrcManageServiceImplTest {
         System.out.println("querySingleMaterial");
         MaterialSrcBean msb = new MaterialSrcBean();
         List<MaterialSrcBean> list = new ArrayList<>();
-        msb.setMaterialCode("62");
+        msb.setMaterialCode("63");
         msb.setMaterialDesc("dfds");
         msb.setMaterialSrc("998");
         list.add(msb);
 //        list.add(msb);
         materialSrcManageService.addMaterial(list);
         System.out.println(" test over ");
+    }
+    
+    @Test
+    public void addListMaterial(){
+        MaterialSrcBean msb = new MaterialSrcBean();
+        List<MaterialSrcBean> list = new ArrayList<>();
+        msb.setMaterialCode("64");
+        msb.setMaterialDesc("dfds");
+        msb.setMaterialSrc("998");
+        list.add(msb);
+        materialSrcManageService.addMaterialList(list);
+        System.out.println(" test over ");
+    }
+    
+    @Test
+    public void getMaterial(){
+        MaterialSrcBean m = materialSrcManageService.getMaterial("60");
+        System.out.println("--------");
     }
     
 }
