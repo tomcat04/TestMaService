@@ -9,6 +9,8 @@ package com.wms.ma.service.impl;
 import com.wms.ma.bean.MaterialSrcBean;
 import com.wms.ma.service.MaterialSrcManageService;
 import com.wms.util.test.WmsSpringJUnit4ClassRunner;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Resource;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -59,6 +61,20 @@ public class MaterialSrcManageServiceImplTest {
         System.out.println("querySingleMaterial");
         MaterialSrcBean result = materialSrcManageService.querySingleMaterial("");
 //        fail("The test case is a prototype.");
+        System.out.println(" test over ");
+    }
+    
+    @Test
+    public void testInsertMaterial() {
+        System.out.println("querySingleMaterial");
+        MaterialSrcBean msb = new MaterialSrcBean();
+        List<MaterialSrcBean> list = new ArrayList<>();
+        msb.setMaterialCode("62");
+        msb.setMaterialDesc("dfds");
+        msb.setMaterialSrc("998");
+        list.add(msb);
+//        list.add(msb);
+        materialSrcManageService.addMaterial(list);
         System.out.println(" test over ");
     }
     

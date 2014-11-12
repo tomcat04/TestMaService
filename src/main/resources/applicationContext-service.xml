@@ -29,7 +29,13 @@
      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
     <import resource="classpath:applicationContext-orm.xml" />
-    <context:annotation-config />  
+    <!--..注解事务..-->
+    <!--<context:annotation-config /> 与context:component-scan类似-->  
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
     <!--扫描包，注册为Bean,多个包则在“”内以，分隔-->
     <context:component-scan base-package="com.wms.ma.service.impl,com.wms.aop.advice" />
     

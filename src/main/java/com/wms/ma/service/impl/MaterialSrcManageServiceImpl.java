@@ -12,6 +12,7 @@ import com.wms.ma.service.MaterialSrcManageService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -37,4 +38,11 @@ public class MaterialSrcManageServiceImpl implements MaterialSrcManageService{
         return msb;
     }
 
+    @Transactional
+    @Override
+    public void addMaterial(List<MaterialSrcBean> list) {
+        for(MaterialSrcBean msb:list){
+            materialMapper.insetOne(msb);
+        }
+    }
 }
