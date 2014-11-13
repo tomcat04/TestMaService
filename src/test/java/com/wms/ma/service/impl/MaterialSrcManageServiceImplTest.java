@@ -92,8 +92,13 @@ public class MaterialSrcManageServiceImplTest {
     
     @Test
     public void getMaterial(){
-        MaterialSrcBean m = materialSrcManageService.getMaterial("60");
-        System.out.println("--------");
+        System.out.println("6666666");
+        System.out.println("线程名称1："+Thread.currentThread().getName());
+        MaterialSrcBean m = materialSrcManageService.getMaterial("60");//有返回值时,异步方法返回会继续执行sout(22222222)
+        if(m == null){
+            System.out.println("11111111111111");
+        }
+        System.out.println("2222222222222222");
     }
     
 }

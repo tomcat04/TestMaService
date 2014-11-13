@@ -12,6 +12,7 @@ import com.wms.ma.service.MaterialSrcManageService;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
@@ -74,7 +75,10 @@ public class MaterialSrcManageServiceImpl implements MaterialSrcManageService{
     }
 
     @Override
+    @Async
     public MaterialSrcBean getMaterial(String materialCode) {
+        System.out.println("getMaterial方法执行");
+        System.out.println("线程名称1："+Thread.currentThread().getName());
         return materialMapper.selectOne(materialCode);
     }
 }
