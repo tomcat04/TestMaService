@@ -37,7 +37,7 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
     <!--扫描包，注册为Bean,多个包则在“”内以，分隔-->
-    <context:component-scan base-package="com.wms.ma.service.impl,com.wms.aop.advice" />
+    <context:component-scan base-package="com.wms.ma.service.impl,com.wms.aop.advice,com.wms.ma.schedule" />
     
     <!--<import resource="classpath:applicationContext-service-aop.xml" />-->
     <!--<import resource="classpath:applicationContext-service-schema-aop.xml" />-->
@@ -45,5 +45,6 @@
     <!-- 打开aop 注解 -->
     <aop:aspectj-autoproxy />
     
-    <import resource="classpath:applicationContext-service-async.xml" />
+    <!--<import resource="classpath:applicationContext-service-async.xml" />-->
+    <import resource="classpath:applicationContext-service-schedule.xml" />
 </beans>

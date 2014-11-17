@@ -101,4 +101,9 @@ public class MaterialSrcManageServiceImplTest {
         System.out.println("2222222222222222");
     }
     
+    @Test
+    public void testSchedule(){
+        System.out.println("------------");
+    }
+    
 }
