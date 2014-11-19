@@ -9,6 +9,7 @@ package com.wms.ma.service.impl;
 import com.wms.core.mapper.MaterialMapper;
 import com.wms.ma.bean.MaterialSrcBean;
 import com.wms.ma.service.MaterialSrcManageService;
+import com.wms.util.exception.CustomException;
 import java.util.List;
 import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,7 @@ public class MaterialSrcManageServiceImpl implements MaterialSrcManageService{
         /**
          * 编程式事务嵌套声明式事务时,事务不会提交
          * 声明式事务嵌套编程式事务时,事务也不会提交
+         * 目测内部事务都不会提交
          */
 //        this.addMaterial(list);
         for(MaterialSrcBean msb:list){
@@ -76,9 +78,7 @@ public class MaterialSrcManageServiceImpl implements MaterialSrcManageService{
 
     @Override
     @Async
-    public MaterialSrcBean getMaterial(String materialCode) {
-        System.out.println("getMaterial方法执行");
-        System.out.println("线程名称1："+Thread.currentThread().getName());
+    public MaterialSrcBean getMaterial(String materialCode) throws CustomException{
         return materialMapper.selectOne(materialCode);
     }
 }

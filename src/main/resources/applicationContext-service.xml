@@ -45,6 +45,6 @@
     <!-- 打开aop 注解 -->
     <aop:aspectj-autoproxy />
     
-    <!--<import resource="classpath:applicationContext-service-async.xml" />-->
+    <import resource="classpath:applicationContext-service-async.xml" />
     <import resource="classpath:applicationContext-service-schedule.xml" />
 </beans>

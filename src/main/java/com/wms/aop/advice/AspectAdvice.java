@@ -6,6 +6,7 @@
 
 package com.wms.aop.advice;
 
+import com.wms.util.exception.CustomException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
@@ -14,12 +15,9 @@ import java.util.logging.Level;
 import org.apache.log4j.Logger;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
@@ -30,7 +28,7 @@ import org.springframework.util.StopWatch;
  * @time 9:04:53
  * 定义一个切面
  */
-//@Aspect//aop注解模式的切面
+@Aspect//aop注解模式的切面
 @Component//配合xml包扫描配置
 public class AspectAdvice {
     
@@ -38,17 +36,18 @@ public class AspectAdvice {
     /**
      * 指定切入点匹配表达式，注意它是以方法的形式进行声明的。
      */
-    @Pointcut("execution(* com.wms.ma.service.*.*(..))")
-    public void anyMethod() {
-    }
+//    @Pointcut("execution(* com.wms.ma.service.*.*(..))")
+//    public void anyMethod() {
+//    }
 
     /**
      * 前置通知
      * 
      * @param jp
+     * @throws java.lang.Exception
      */
-    @Before(value = "execution(* com.wms.ma.service.*.*(..))")
-    public void doBefore(JoinPoint jp) {
+//    @Before(value = "execution(* com.wms.ma.service.*.*(..))")
+    public void doBefore(JoinPoint jp) throws Exception {
         System.out.println("===========进入before advice============ \n");
 
         System.out.print("准备在" + jp.getTarget().getClass() + "对象上用");
@@ -66,7 +65,7 @@ public class AspectAdvice {
      * @param result
      *            返回值
      */
-    @AfterReturning(value = "anyMethod()", returning = "result")
+//    @AfterReturning(value = "anyMethod()", returning = "result")
     public void doAfter(JoinPoint jp, String result) {
         System.out.println("==========进入after advice=========== \n");
         System.out.println("切入点方法执行完了 \n");
@@ -96,7 +95,7 @@ public class AspectAdvice {
         // 调用方法的参数
         Object[] args = pjp.getArgs();
         String param;
-        this.xxx(args[0]);
+//        this.xxx(args[0]);
         // 调用的方法名
         String method = pjp.getSignature().getName();
         // 获取目标对象
@@ -110,7 +109,7 @@ public class AspectAdvice {
 
         System.out.println("输出：" + args[0] + ";" + method + ";" + target + ";" + result + "\n");
         System.out.println("调用方法结束：之后执行！\n");
-        this.xxx(result);
+//        this.xxx(result);
         return result;
     }
 

@@ -8,9 +8,12 @@ package com.wms.ma.service.impl;
 
 import com.wms.ma.bean.MaterialSrcBean;
 import com.wms.ma.service.MaterialSrcManageService;
+import com.wms.util.exception.CustomException;
 import com.wms.util.test.WmsSpringJUnit4ClassRunner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -91,15 +94,15 @@ public class MaterialSrcManageServiceImplTest {
     }
     
     @Test
-    public void getMaterial(){
+    public void getMaterial() throws CustomException{
         System.out.println("6666666");
         System.out.println("线程名称1："+Thread.currentThread().getName());
-        MaterialSrcBean m = materialSrcManageService.getMaterial("60");//有返回值时,异步方法返回会继续执行sout(22222222)
+        MaterialSrcBean m = materialSrcManageService.getMaterial("60");//有返回值时,异步方法返回会继续执行sout(22222222)[误]
         if(m == null){
             System.out.println("11111111111111");
         }
         System.out.println("2222222222222222");
-    }
+        }
     
     @Test
     public void testSchedule(){

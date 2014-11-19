@@ -6,7 +6,10 @@
 
 package com.wms.ma.schedule;
 
+import com.wms.util.DateUtil;
+import java.util.Date;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 /**
  *
@@ -15,11 +18,20 @@ import org.springframework.scheduling.annotation.Scheduled;
  * @time 17:07:51
  *
  */
+//@Configuration
+//@EnableAsync
+//@EnableScheduling
+@Component
 public class MySchedule {
-
+    /**
+     * fixedDelay上一任务完成到下一任务开始
+     * fixedRate上一任务开始到下一任务开始
+     * cron具体任务周期执行时间点
+     */
     @Scheduled(fixedDelay = 5000)  
     void doSomethingWithDelay(){  
-        System.out.println("I'm doing with delay now!");  
+        
+        System.out.println("I'm doing with delay now!" + DateUtil.format(new Date(), "yyyy-MM-dd hh:mm:ss"));  
     }  
       
     @Scheduled(fixedRate = 5000)  
@@ -29,6 +41,6 @@ public class MySchedule {
       
     @Scheduled(cron = "0/5 * * * * *")  
     void doSomethingWith(){  
-        System.out.println("I'm doing with cron now!");  
+        System.out.println("I'm doing with cron now!" + new Date().getTime());  
     }  
 }
