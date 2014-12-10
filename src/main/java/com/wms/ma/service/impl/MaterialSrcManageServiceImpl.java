@@ -29,6 +29,7 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
  *
  */
 @Service
+//@WebService
 public class MaterialSrcManageServiceImpl implements MaterialSrcManageService{
 
     @Autowired
@@ -77,8 +78,15 @@ public class MaterialSrcManageServiceImpl implements MaterialSrcManageService{
     }
 
     @Override
-    @Async
+//    @Async
+//    @WebMethod
     public MaterialSrcBean getMaterial(String materialCode) throws CustomException{
+        return materialMapper.selectOne(materialCode);
+    }
+
+    @Override
+//    @WebMethod
+    public MaterialSrcBean getMaterialAnsy(String materialCode) throws CustomException {
         return materialMapper.selectOne(materialCode);
     }
 }
